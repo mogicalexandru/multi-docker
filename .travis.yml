@@ -3,20 +3,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t mogicalexandru/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t alexandrumogic/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true mogicalexandru/react-test npm test -- --coverage
+  - docker run -e CI=true alexandrumogic/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t mogicalexandru/multi-client ./client
-  - docker build -t mogicalexandru/multi-nginx ./nginx
-  - docker build -t mogicalexandru/multi-server ./server
-  - docker build -t mogicalexandru/multi-worker ./worker
+  - docker build -t alexandrumogic/multi-client ./client
+  - docker build -t alexandrumogic/multi-nginx ./nginx
+  - docker build -t alexandrumogic/multi-server ./server
+  - docker build -t alexandrumogic/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take images and push them to docker hub
-  - docker push mogicalexandru/multi-client
-  - docker push mogicalexandru/multi-nginx
-  - docker push mogicalexandru/multi-server
-  - docker push mogicalexandru/multi-worker
+  - docker push alexandrumogic/multi-client
+  - docker push alexandrumogic/multi-nginx
+  - docker push alexandrumogic/multi-server
+  - docker push alexandrumogic/multi-worker
